@@ -1,6 +1,6 @@
 const execa = require('execa')
 
-module.exports = async api => {
+module.exports = async (api, cfg) => {
   const logger = require('../lib/logger.js')(api),
     log = logger('app:webview'),
     warn = logger('app:webview', 'red')
@@ -9,9 +9,8 @@ module.exports = async api => {
 
   const buildFn = target => execa(
       'cargo',
-      ['build']
+      ['build', '--features', 'prod']
       .concat(api.ctx.debug ? [] : ['--release'])
-      .concat(['--features', 'prod'])
       .concat(target ? ['--target', target] : []),
       {
         stdio: 'inherit',
@@ -21,7 +20,7 @@ module.exports = async api => {
 
   const out = await buildFn()
   if (out.code) {
-    warn('Error executing cargo command.')
+    warn('Error executing `cargo build`.')
   } else {
     log('Built successfully.')
   }

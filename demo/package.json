@@ -4,7 +4,7 @@
   "description": "Quasar Portal test app",
   "productName": "Quasar Portal Demo",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "Lucas Fernandes Nogueira <lucasfernandesnog@gmail.com>",
+  "author": "Lucas Fernandes Gonçalves Nogueira <lucasfernandesnog@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",

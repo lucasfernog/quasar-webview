@@ -824,10 +824,10 @@
   version "0.0.0"
   uid ""
 
-"@quasar/babel-preset-app@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@quasar/babel-preset-app/-/babel-preset-app-1.1.2.tgz#ee8389a49c08941577ce8187fc90474b11e6672e"
-  integrity sha512-/g7y9oXiD+M3W+EitFKhaGRhxPxHOXjl/Fc8Y2aTd9uo2V2zkCw9T2uBpVqPxfQaFBV/zFXOS51Sp4DXS321wQ==
+"@quasar/babel-preset-app@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@quasar/babel-preset-app/-/babel-preset-app-1.1.3.tgz#9e09bd47f960bc0cc77b6edde8dd8918453d225f"
+  integrity sha512-5yCNk+qsvej8f+9xwlvxKmjUHP0SIhIy1tQS6/iRaGyg93ZHHUE35fUieJx1WDPHnXEe8Hvak8JkXjue/z1gdw==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/plugin-proposal-class-properties" "7.4.4"
@@ -845,7 +845,7 @@
     "@babel/runtime-corejs2" "7.4.5"
     "@babel/runtime-corejs3" "7.4.5"
     babel-loader "8.0.6"
-    babel-plugin-dynamic-import-node "2.2.0"
+    babel-plugin-dynamic-import-node "2.3.0"
     babel-plugin-module-resolver "3.2.0"
     babel-plugin-transform-imports "1.5.1"
 
@@ -856,6 +856,10 @@
 
 "@quasar/quasar-app-extension-portal@file:..":
   version "1.0.0-beta.0"
+  dependencies:
+    command-exists "^1.2.8"
+    execa "^1.0.0"
+    inquirer "^6.4.1"
 
 "@types/events@*":
   version "3.0.0"
@@ -1361,10 +1365,10 @@ babel-loader@8.0.6:
     mkdirp "^0.5.1"
     pify "^4.0.1"
 
-babel-plugin-dynamic-import-node@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.2.0.tgz#c0adfb07d95f4a4495e9aaac6ec386c4d7c2524e"
-  integrity sha512-fP899ELUnTaBcIzmrW7nniyqqdYWrWuJUyPWHxFa/c7r7hS6KC8FscNfLlBNIoPSc55kYMGEEKjPjJGCLbE1qA==
+babel-plugin-dynamic-import-node@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.0.tgz#f00f507bdaa3c3e3ff6e7e5e98d90a7acab96f7f"
+  integrity sha512-o6qFkpeQEBxcqt0XYlWzAVxNCSCZdUgcR8IRlhD/8DylxjjO4foPcvTW0GGKa/cVt3rvxZ7o5ippJ+/0nvLhlQ==
   dependencies:
     object.assign "^4.1.0"
 
@@ -1945,6 +1949,11 @@ colors@~0.6.0-1:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
   integrity sha1-JCP+ZnisDF2uiFLl0OW+CMmXq8w=
+
+command-exists@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/command-exists/-/command-exists-1.2.8.tgz#715acefdd1223b9c9b37110a149c6392c2852291"
+  integrity sha512-PM54PkseWbiiD/mMsbvW351/u+dafwTJ0ye2qB60G1aGQP9j3xK2gmMDc+R34L3nDtx4qMCitXT75mkbkGJDLw==
 
 commander@2.17.x:
   version "2.17.1"
@@ -3979,7 +3988,7 @@ inquirer@6.3.1:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-inquirer@^6.2.2:
+inquirer@^6.2.2, inquirer@^6.4.1:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-6.4.1.tgz#7bd9e5ab0567cd23b41b0180b68e0cfa82fc3c0b"
   integrity sha512-/Jw+qPZx4EDYsaT6uz7F4GJRNFMRdKNeUZw3ZnKV8lyuUgz/YWRCSUAJMZSVhSq4Ec0R2oYnyi6b3d4JXcL5Nw==

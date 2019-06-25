@@ -1,5 +1,5 @@
 module.exports.install = async (language, api) => {
-  const logger = require('./logger.js'),
+  const logger = require('./logger.js')(api),
     log = logger('app:webview')
   log('Checking dependencies...')
   // ensure deps are installed
