@@ -1,0 +1,29 @@
+{
+  "name": "@quasar/quasar-app-extension-portal",
+  "version": "1.0.0-beta.0",
+  "description": "Quasar Portal.",
+  "repository": "https://github.com/quasarframework/quasar-portal",
+  "author": "Daniel Thompson-Yvetot",
+  "contributors": [
+    "Lucas Fernandes Gonçalves Nogueira"
+  ],
+  "main": "src/index.js",
+  "license": "MIT",
+  "private": true,
+  "homepage": "http://quasar-framework.org",
+  "dependencies": {
+    "command-exists": "^1.2.8",
+    "execa": "^1.0.0",
+    "inquirer": "^6.4.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.8.0"
+  },
+  "bugs": {
+    "url": "https://github.com/quasarframework/quasar-portal/issues"
+  },
+  "scripts": {}
+}

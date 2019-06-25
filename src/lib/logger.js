@@ -1,0 +1,1 @@
+module.exports = (api) => require(api.resolve.cli('lib/helpers/logger.js'))
