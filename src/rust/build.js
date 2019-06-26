@@ -1,6 +1,6 @@
 const execa = require('execa')
 
-module.exports = async (api, cfg) => {
+module.exports = async (api, quasarConf) => {
   const logger = require('../lib/logger.js')(api),
     log = logger('app:webview'),
     warn = logger('app:webview', 'red')
