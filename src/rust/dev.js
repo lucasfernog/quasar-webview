@@ -1,6 +1,6 @@
 const execa = require('execa')
 
-module.exports = async (api, cfg) => {
+module.exports = async (api, quasarConf) => {
   const logger = require('../lib/logger.js')(api),
     log = logger('app:webview'),
     warn = logger('app:webview', 'red')
@@ -9,7 +9,7 @@ module.exports = async (api, cfg) => {
 
   const out = await execa(
     'cargo',
-    ['run', '--features', 'dev', '--', '--url', cfg.build.APP_URL], {
+    ['run', '--features', 'dev', '--', '--url', quasarConf.build.APP_URL], {
       stdio: 'inherit',
       cwd: api.resolve.webview('')
     }
