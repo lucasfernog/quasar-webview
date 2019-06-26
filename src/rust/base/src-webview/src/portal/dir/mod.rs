@@ -36,10 +36,10 @@ pub fn walk_dir(path_copy:String) -> Result<Vec<DiskEntry>, String> {
                             name: display_value.to_string()
                         });
                     }
-                    Err(err) => return Result::Err(err),
+                    Err(_) => {},
                 }
             }
-            Err(err) => return Result::Err(err.to_string()),
+            Err(_) => {},
         }
     }
     return Result::Ok(files_and_dirs);

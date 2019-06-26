@@ -16,7 +16,6 @@ module.exports = async (api, cfg) => {
   )
   if (out.code) {
     warn('Error executing `cargo run`.')
-  } else {
-    log('Running...')
   }
+  process.exit(out.code)
 }

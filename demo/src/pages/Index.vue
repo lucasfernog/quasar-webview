@@ -36,13 +36,16 @@ export default {
     }
   },
   mounted () {
-    this.$q.webview.execute('quasar', ['info'])
-      .then(output => {
-        this.$q.notify(output)
-      })
-      .catch(err => {
-        this.$q.notify(`err ${err}`)
-      })
+    setTimeout(() => {
+      this.$q.notify('Calling command...')
+      this.$q.webview.execute('quasar', ['info'])
+        .then(output => {
+          this.$q.notify(output)
+        })
+        .catch(err => {
+          this.$q.notify(`err ${err}`)
+        })
+    }, 2500)
   },
   methods: {
     getFiles () {

@@ -2,15 +2,11 @@
 extern crate serde_derive;
 extern crate serde_json;
 extern crate web_view;
-extern crate dirs;
 extern crate clap;
 
 #[cfg(feature = "prod")]
 #[macro_use]
 extern crate rouille;
-
-use std::fs::File;
-use std::io::Write;
 
 #[cfg(feature = "dev")]
 use clap::{Arg, App};
@@ -18,11 +14,8 @@ use clap::{Arg, App};
 #[cfg(feature = "prod")]
 use std::thread;
 
-mod dir;
-mod file;
-mod rpc;
+mod portal;
 mod cmd;
-mod api;
 
 include!(concat!(env!("OUT_DIR"), "/data.rs"));
 
@@ -85,69 +78,26 @@ fn main() {
             match serde_json::from_str(arg).unwrap() {
                 Init => (),
                 ReadAsString { path, callback, error } => {
-                    let _path = path.clone();
-                    let callback_string = rpc::format_callback_result(file::read_string(_path)
-                        .and_then(|f| {
-                            serde_json::to_string(&f)
-                                .map_err(|err| err.to_string())
-                                .map(|s| s.to_string())
-                        }), callback, error);
-
-                    _webview.eval(callback_string.as_str()).unwrap();
+                    portal::file_system::read_text_file(_webview, path, callback, error);
                 }
                 ReadAsBinary { path, callback, error } => {
-                    let _path = path.clone();
-                    let callback_string = rpc::format_callback_result(file::read_binary(_path)
-                        .and_then(|f| {
-                            serde_json::to_string(&f)
-                                .map_err(|err| err.to_string())
-                                .map(|s| s.to_string())
-                        }), callback, error);
-
-                    _webview.eval(callback_string.as_str()).unwrap();
+                    portal::file_system::read_binary_file(_webview, path, callback, error);
                 }
                 Write { file, contents, callback, error } => {
-                    let callback_string = rpc::format_callback_result(File::create(file)
-                        .map_err(|err|  err.to_string())
-                        .and_then(|mut f| {
-                            f.write_all(contents.as_bytes())
-                                .map_err(|err| err.to_string())
-                                .map(|_| "".to_string())
-                        }), callback, error);
-
-                    _webview.eval(callback_string.as_str()).unwrap();
+                    portal::file_system::write_file(_webview, file, contents, callback, error);
                 }
-                ListDirs{ path, callback, error } => {
-                    let callback_string = rpc::format_callback_result(dir::list_dir_contents(&path)
-                        .and_then(|f| {
-                            serde_json::to_string(&f)
-                                .map_err(|err| err.to_string())
-                        }), callback, error);
+                ListDirs { path, callback, error } => {
+                    portal::file_system::list_dirs(_webview, path, callback, error);
 
-                    println!("Listing {}", path);
-                    _webview.eval(callback_string.as_str()).unwrap();
                 }
                 List { path, callback, error } => {
-                    let path_copy = &path.clone();
-                    let callback_string = rpc::format_callback_result(dir::walk_dir(path_copy.to_string())
-                        .and_then(|f| {
-                            serde_json::to_string(&f)
-                                .map_err(|err| err.to_string())
-                        }), callback, error);
-
-                    _webview.eval(callback_string.as_str()).unwrap();
+                    portal::file_system::list(_webview, path, callback, error);
                 }
                 SetTitle { title } => {
                     _webview.set_title(&title).unwrap();
                 }
                 Call { command, args, callback, error } => {
-                    let callback_string = rpc::format_callback_result(
-                        api::call(command, args)
-                            .map_err(|err| format!("`{}`", err))
-                            .map(|output| format!("`{}`", output)),
-                        callback, error
-                    );
-                     _webview.eval(callback_string.as_str()).unwrap();
+                    portal::command::call(_webview, command, args, callback, error);
                 }
             }
             Ok(())
