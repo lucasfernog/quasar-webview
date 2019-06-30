@@ -5,6 +5,10 @@ pub mod file_system;
 pub mod dir;
 pub mod file;
 pub mod rpc;
+#[macro_use]
+mod macros;
+pub mod http;
+pub mod platform;
 
 extern crate web_view;
 use web_view::WebView;
