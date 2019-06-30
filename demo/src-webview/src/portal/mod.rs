@@ -9,6 +9,8 @@ pub mod rpc;
 mod macros;
 pub mod http;
 pub mod platform;
+pub mod version;
+pub mod updater;
 
 extern crate web_view;
 use web_view::WebView;

@@ -2,8 +2,11 @@ use std::fs;
 
 extern crate serde_json;
 
+mod error;
+
 pub mod extract;
-pub mod error;
+pub mod file_move;
+pub use error::Error;
 
 pub fn read_string(file: String) -> Result<String, String> {
     fs::read_to_string(file)

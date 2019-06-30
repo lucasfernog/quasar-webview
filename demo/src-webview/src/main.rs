@@ -27,7 +27,7 @@ fn main() {
     let tmp_dir = portal::dir::with_temp_dir(|dir| {
         let file_path = dir.path().join("my-temporary-note.pdf");
         let mut tmp_archive = std::fs::File::create(file_path).unwrap();
-        portal::http::download(&"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf".to_string(), &mut tmp_archive).unwrap();
+        portal::http::download(&"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf".to_string(), &mut tmp_archive, true).unwrap();
 
     });
     

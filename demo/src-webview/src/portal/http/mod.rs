@@ -3,24 +3,22 @@ extern crate pbr;
 
 use serde::Serialize;
 use std::io;
-pub mod error;
-use error::*;
+mod error;
+pub use self::error::Error;
 
-#[macro_use]
-mod macros;
-
-pub fn get(url: &String) -> reqwest::Result<reqwest::Response> {
+pub fn get(url: &String) -> Result<reqwest::Response, Error> {
     return reqwest::Client::new().get(url).send()
 }
 
-pub fn post_as_json<T: Serialize + ?Sized>(url: &String, payload: &T) -> reqwest::Result<reqwest::Response> {
+pub fn post_as_json<T: Serialize + ?Sized>(url: &String, payload: &T) -> Result<reqwest::Response, Error> {
     return reqwest::Client::new().post(url).json(payload).send()
 }
 
-pub fn download<T: io::Write>(url: &String, mut dest: T) -> Result<(), Error> {
+pub fn download<T: io::Write>(url: &String, mut dest: T, display_progress: bool) -> Result<(), Error> {
     use io::BufRead;
 
     set_ssl_vars!();
+    
     let resp = get(url)?;
     let size = resp
         .headers()
@@ -40,7 +38,7 @@ pub fn download<T: io::Write>(url: &String, mut dest: T) -> Result<(), Error> {
         )
     }
 
-    let show_progress = if size == 0 { false } else { true };
+    let show_progress = if size == 0 { false } else { display_progress };
 
     let mut src = io::BufReader::new(resp);
     let mut bar = if show_progress {
