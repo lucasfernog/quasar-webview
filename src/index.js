@@ -1,4 +1,8 @@
-module.exports = async function(api) {
+module.exports = async function (api) {
+  if (api.ctx.mode !== 'webview') {
+    return
+  }
+
   const webviewRunner = require('./lib/runner.js')
 
   api.afterBuild(async (api, { quasarConf }) => {
