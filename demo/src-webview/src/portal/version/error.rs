@@ -30,7 +30,7 @@ impl std::error::Error for Error {
 }
 
 impl From<semver::SemVerError> for Error {
-    fn from(e: semver::SemVerError) -> Error {
+    fn from(e: semver::SemVerError) -> Self {
         Error::SemVer(e)
     }
 }

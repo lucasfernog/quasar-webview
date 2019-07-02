@@ -34,13 +34,13 @@ impl std::error::Error for Error {
 }
 
 impl From<std::io::Error> for Error {
-    fn from(e: std::io::Error) -> Error {
+    fn from(e: std::io::Error) -> Self {
         Error::Io(e)
     }
 }
 
 impl From<ZipError> for Error {
-    fn from(e: ZipError) -> Error {
+    fn from(e: ZipError) -> Self {
         Error::Zip(e)
     }
 }

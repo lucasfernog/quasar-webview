@@ -13,8 +13,8 @@ pub enum Error {
     Config(String),
     Io(std::io::Error),
     Zip(ZipError),
-    File(file::error::Error),
-    Version(version::error::Error),
+    File(file::Error),
+    Version(version::Error),
 }
 
 impl std::fmt::Display for Error {
@@ -48,31 +48,31 @@ impl std::error::Error for Error {
 }
 
 impl From<std::io::Error> for Error {
-    fn from(e: std::io::Error) -> Error {
+    fn from(e: std::io::Error) -> Self {
         Error::Io(e)
     }
 }
 
-impl From<file::error::Error> for Error {
-    fn from(e: file::error::Error) -> Error {
+impl From<file::Error> for Error {
+    fn from(e: file::Error) -> Self {
         Error::File(e)
     }
 }
 
-impl From<http::error::Error> for Error {
-    fn from(e: http::error::Error) -> Error {
+impl From<http::Error> for Error {
+    fn from(e: http::Error) -> Self {
         Error::Network(e.to_string())
     }
 }
 
 impl From<reqwest::Error> for Error {
-    fn from(e: reqwest::Error) -> Error {
+    fn from(e: reqwest::Error) -> Self {
         Error::Network(e.to_string())
     }
 }
 
-impl From<version::error::Error> for Error {
-    fn from(e: version::error::Error) -> Error {
+impl From<version::Error> for Error {
+    fn from(e: version::Error) -> Self {
         Error::Version(e)
     }
 }

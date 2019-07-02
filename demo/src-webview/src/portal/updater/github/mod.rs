@@ -7,8 +7,8 @@ use super::super::http;
 use super::super::file::file_move::{Move};
 use super::super::file::extract::{Extract};
 
-pub mod release;
-use release::*;
+mod release;
+pub use release::*;
 mod error;
 pub use self::error::Error;
 use super::*;
@@ -277,7 +277,7 @@ impl Update {
         }
     }
 
-    pub fn update_extended(self) -> Result<Status, Error> {
+    pub fn update(self) -> Result<Status, Error> {
         self.println(&format!("Checking target-arch... {}", self.target));
         self.println(&format!(
             "Checking current version... v{}",

@@ -102,7 +102,7 @@ impl ReleaseListBuilder {
     }
 
     /// Set the optional arch `target` name, used to filter available releases
-    pub fn with_target(&mut self, target: &str) -> &mut Self {
+    pub fn target(&mut self, target: &str) -> &mut Self {
         self.target = Some(target.to_owned());
         self
     }

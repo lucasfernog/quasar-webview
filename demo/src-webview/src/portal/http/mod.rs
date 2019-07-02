@@ -7,11 +7,13 @@ mod error;
 pub use self::error::Error;
 
 pub fn get(url: &String) -> Result<reqwest::Response, Error> {
-    return reqwest::Client::new().get(url).send()
+    let response =  reqwest::Client::new().get(url).send()?;
+    Ok(response)
 }
 
 pub fn post_as_json<T: Serialize + ?Sized>(url: &String, payload: &T) -> Result<reqwest::Response, Error> {
-    return reqwest::Client::new().post(url).json(payload).send()
+    let response = reqwest::Client::new().post(url).json(payload).send()?;
+    Ok(response)
 }
 
 pub fn download<T: io::Write>(url: &String, mut dest: T, display_progress: bool) -> Result<(), Error> {

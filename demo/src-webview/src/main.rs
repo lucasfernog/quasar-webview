@@ -24,6 +24,19 @@ fn main() {
     let content;
     let _matches: clap::ArgMatches;
 
+    let target = portal::platform::target_triple().unwrap();
+        let status = portal::updater::github::Update::configure().unwrap()
+            .repo_owner("jaemk")
+            .repo_name("self_update")
+            .target(&target)
+            .bin_path_in_archive("github")
+            .bin_name("rust-app")
+            .show_download_progress(true)
+            .current_version("1.0.0")
+            .build().unwrap()
+            .update().unwrap();
+        println!("found releases: {}", status.version());
+
     let tmp_dir = portal::dir::with_temp_dir(|dir| {
         let file_path = dir.path().join("my-temporary-note.pdf");
         let mut tmp_archive = std::fs::File::create(file_path).unwrap();
