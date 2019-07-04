@@ -30,6 +30,7 @@ either = "1.5.0"
 tar = "0.4"
 flate2 = "1"
 hyper-old-types = "0.11.0"
+sysinfo = "0.9"
 
 [build-dependencies]
 includedir_codegen = "0.5.0"
@@ -37,3 +38,11 @@ includedir_codegen = "0.5.0"
 [features]
 dev = [] # has no explicit dependencies
 prod = [] # has no explicit dependencies
+
+[[bin]]
+name = "updater"
+path = "src/updater.rs"
+
+[[bin]]
+name = "app"
+path = "src/app.rs"

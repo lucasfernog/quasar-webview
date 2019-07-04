@@ -149,7 +149,7 @@ impl<'a> Extract<'a> {
                         let file_name = file_to_extract.file_name().ok_or_else(|| {
                             Error::Extract("Extractor source has no file-name".into())
                         })?;
-                        let mut out_path = into_dir.join(file_name);
+                        let out_path = into_dir.join(file_name);
                         let mut out_file = fs::File::create(&out_path)?;
                         io::copy(&mut reader, &mut out_file)?;
                     }

@@ -24,25 +24,12 @@ fn main() {
     let content;
     let _matches: clap::ArgMatches;
 
-    let target = portal::platform::target_triple().unwrap();
-        let status = portal::updater::github::Update::configure().unwrap()
-            .repo_owner("jaemk")
-            .repo_name("self_update")
-            .target(&target)
-            .bin_path_in_archive("github")
-            .bin_name("rust-app")
-            .show_download_progress(true)
-            .current_version("1.0.0")
-            .build().unwrap()
-            .update().unwrap();
-        println!("found releases: {}", status.version());
-
-    let tmp_dir = portal::dir::with_temp_dir(|dir| {
-        let file_path = dir.path().join("my-temporary-note.pdf");
-        let mut tmp_archive = std::fs::File::create(file_path).unwrap();
-        portal::http::download(&"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf".to_string(), &mut tmp_archive, true).unwrap();
-
-    });
+    #[cfg(feature="prod")]
+    {
+        thread::spawn(|| {
+            portal::command::spawn_relative_command("updater".to_string(), Vec::new(), std::process::Stdio::inherit()).unwrap();
+        });
+    }
     
     #[cfg(feature = "dev")]
     {
@@ -70,7 +57,7 @@ fn main() {
         debug = cfg!(debug_assertions);
         
         thread::spawn(move || {
-            rouille::start_server("0.0.0.0:5000", move |request| {
+            /*rouille::start_server("0.0.0.0:5000", move |request| {
                 router!(request,
                     (GET) (/) => {
                         // TODO load the correct html index file (the filename is configurable through quasar.conf.js) (include the html into assets?)
@@ -82,7 +69,7 @@ fn main() {
                     },
                     _ => rouille::Response::empty_404()
                 )
-            });
+            });*/
         });
     }
 
