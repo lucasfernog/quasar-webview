@@ -32,8 +32,8 @@ fn main() {
         .bin_install_path(&portal::command::command_path("app".to_string()).unwrap())
         .show_download_progress(true)
         .current_version("1.0.0")
-        .build().expect("oopsy")
-        .update().expect("oops");
+        .build().unwrap()
+        .update().unwrap();
     println!("found releases: {}", status.version());
 
     /*let tmp_dir = portal::dir::with_temp_dir(|dir| {

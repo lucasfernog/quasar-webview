@@ -57,7 +57,7 @@ fn main() {
         debug = cfg!(debug_assertions);
         
         thread::spawn(move || {
-            /*rouille::start_server("0.0.0.0:5000", move |request| {
+            rouille::start_server("0.0.0.0:5000", move |request| {
                 router!(request,
                     (GET) (/) => {
                         // TODO load the correct html index file (the filename is configurable through quasar.conf.js) (include the html into assets?)
@@ -69,7 +69,7 @@ fn main() {
                     },
                     _ => rouille::Response::empty_404()
                 )
-            });*/
+            });
         });
     }
 
