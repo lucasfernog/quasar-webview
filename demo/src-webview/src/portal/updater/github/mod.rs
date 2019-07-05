@@ -4,8 +4,7 @@ use std::env;
 
 use super::super::version;
 use super::super::http;
-use super::super::file::file_move::{Move};
-use super::super::file::extract::{Extract};
+use super::super::file::{Move, Extract};
 
 mod release;
 pub use release::*;
